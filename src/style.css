@@ -79,21 +79,35 @@ body {
 
 /* Responsividade (Celular) */
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none; /* Escondemos o menu no mobile por enquanto */
-    }
-    
-    .menu-toggle {
-        cursor: pointer;
+    .nav-container {
+        padding: 15px 20px;
     }
 
-    .bar {
+    /* Estilização para o Menu Hambúrguer aparecer */
+    .menu-toggle {
         display: block;
-        width: 25px;
-        height: 3px;
-        margin: 5px auto;
-        background-color: var(--text-color);
-        transition: 0.3s;
+        z-index: 1001;
+    }
+
+    /* Transformando a lista de links em menu suspenso */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Começa escondido fora da tela */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        transition: 0.4s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        display: flex; /* Garante que o flex funcione quando a classe active entrar */
+    }
+
+    /* Classe que será ativada via JS */
+    .nav-menu.active {
+        right: 0;
     }
 }
 
@@ -153,18 +167,543 @@ section.hero.container {
 }
 
 /* --- RESPONSIVIDADE --- */
-@media (max-width: 968px) {
-    .hero {
+@media (max-width: 768px) {
+    /* Hero: Foto em cima, texto embaixo */
+    section.hero.container {
         flex-direction: column-reverse;
+        gap: 40px;
+        padding: 40px 20px;
         text-align: center;
-        gap: 50px;
+    }
+
+    .hero-image img {
+        max-width: 280px; /* Foto menor para caber no visor */
+        box-shadow: 15px 15px 0px var(--accent-color);
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
-    .nav-menu {
-        display: none; /* Ideal implementar o menu mobile no JS depois */
+    /* Seção Sobre */
+    .sobre-section {
+        padding: 60px 0;
+    }
+
+    .sobre-image img {
+        max-width: 300px;
+        box-shadow: -15px 15px 0px var(--bg-color);
+    }
+
+    /* Grid de Abordagem (PBE) */
+    .pbe-grid {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    /* FAQ: Ajuste de largura */
+    .faq-container {
+        margin: 40px 20px 0;
+    }
+
+    /* Mapa: Menor altura para facilitar o scroll com o dedo */
+    .mapa-wrapper iframe {
+        height: 300px;
+    }
+}
+
+.sobre-section {
+    padding: 100px 0;
+    background-color: white; /* Diferencia da cor creme do Hero */
+}
+
+.sobre-grid {
+    display: flex;
+    align-items: center;
+    gap: 60px; /* Espaço entre a foto e o texto */
+}
+
+.sobre-image {
+    flex: 1;
+}
+
+.sobre-image img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    box-shadow: -20px 20px 0px var(--bg-color); /* Sombra invertida para estilo */
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.sobre-text {
+    flex: 1;
+}
+
+.sobre-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.sobre-text p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sobre-grid {
+        flex-direction: column; /* Coloca a foto em cima do texto */
+        text-align: center;
+        gap: 30px;
+    }
+}
+
+.abordagem-section {
+    padding: 100px 0;
+    background-color: var(--bg-color); /* Fundo limpo para passar clareza */
+    text-align: center;
+}
+
+.abordagem-header {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    margin-right: 20px;
+}
+
+.abordagem-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.pbe-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.pbe-card {
+    flex: 1;
+    background-color: var(--bg-color); /* O creme suave do projeto */
+    padding: 40px 30px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.pbe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.pbe-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.pbe-card h3 {
+    font-family: var(--font-heading);
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.pbe-card p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 60px auto 0;
+    text-align: left;
+}
+
+.faq-title {
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.faq-item {
+    background-color: #ffffff; /* Fundo branco do card */
+    border: 1px solid #ddd;    /* Borda sutil */
+    border-radius: 4px;       /* Bordas quase retas */
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.faq-item summary {
+    padding: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none; /* Remove a setinha padrão do navegador */
+    display: flex;
+    justify-content: space-between; /* Espaça texto e ícone */
+    align-items: center;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+/* Esconde a setinha padrão do details no Safari/Chrome */
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Ícone de + estilizado na direita */
+.faq-item summary .icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    transition: transform 0.3s ease;
+}
+
+/* Muda o + para - quando aberto */
+.faq-item[open] summary .icon {
+    transform: rotate(45deg); /* Gira para parecer um X ou pode trocar o conteúdo */
+}
+
+.faq-content {
+    padding: 0 20px 20px 20px;
+    line-height: 1.6;
+    color: #333;
+    font-size: 0.95rem;
+    border-top: 1px solid #eee; /* Linha divisória interna */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .pbe-grid {
+        flex-direction: column;
+    }
+}
+
+.contato-section {
+    padding: 100px 0;
+    background-color: #fff; /* Usando o creme do projeto */
+}
+
+.contato-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.contato-info {
+    flex: 1;
+}
+
+.contato-info h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.contato-detalhes {
+    margin-top: 30px;
+}
+
+.item-contato {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.item-contato span {
+    font-size: 1.5rem;
+}
+
+/* O Card de Ação */
+.contato-acao {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.agendar-card {
+    background-color: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    max-width: 400px;
+}
+
+.agendar-card h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 15px;
+}
+
+.btn-whatsapp {
+    display: block;
+    background-color: #25D366; /* Cor oficial do WhatsApp */
+    color: white;
+    padding: 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 25px 0;
+    transition: 0.3s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+    transform: scale(1.03);
+}
+
+.crp-footer {
+    font-size: 0.8rem;
+    display: block;
+    color: #888;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .contato-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .item-contato {
+        justify-content: center;
+    }
+}
+
+.mapa-section {
+    padding: 60px 0;
+    background-color: #fff; /* Ou a cor de fundo que preferir para destacar */
+}
+
+.mapa-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px; /* Mantendo a identidade visual dos seus cards */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05); /* Sombra suave para dar profundidade */
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.mapa-wrapper iframe {
+    display: block; /* Remove espaços vazios na base do iframe */
+    filter: grayscale(0.2) contrast(0.9); /* Opcional: deixa o mapa levemente mais sofisticado */
+}
+
+.main-footer {
+    background-color: var(--bg-color); 
+    padding: 60px 0 20px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    color: var(--text-color);
+}
+
+/* Alinhamento das 3 colunas principais */
+.footer-grid {
+    display: flex;
+    justify-content: space-between; /* Distribui as colunas igualmente */
+    align-items: flex-start;        /* Alinha o topo delas */
+    gap: 60px;                      /* Espaço entre colunas */
+    margin-bottom: 40px;
+}
+
+.footer-brand {
+    flex: 1.5; /* Dá um pouco mais de espaço para a logo e slogan */
+}
+
+.footer-links, .footer-crp {
+    flex: 1;
+}
+
+.footer-nath {
+    display: flex;
+    align-items: center; /* Alinha a imagem e o texto verticalmente */
+    gap: 15px; /* Espaço entre a imagem e o texto */
+}
+
+.footer-nath p {
+    font-family: 'Playfair Display', serif; /* Fonte elegante */
+    font-size: 1.8rem;
+    color: var(--text-color); /* Nude sofisticado */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-logo {
+    height: 45px; /* Ajuste conforme a sua logo */
+    width: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.footer-brand p {
+    font-size: 0.9rem;
+    max-width: 250px; /* Evita que o texto da logo se espalhe muito */
+}
+
+.footer-links h4, .footer-crp h4 {
+    font-family: var(--font-heading);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    padding-left: 5px; /* Efeito sutil de hover */
+}
+
+.footer-crp p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* --- BARRA INFERIOR (Créditos) --- */
+.footer-bottom {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 25px;
+    margin-top: 20px;
+}
+
+.bottom-flex {
+    display: flex;
+    justify-content: space-between; /* Texto na esquerda, dev-salles na direita */
+    align-items: center;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Estilização da sua marca dev-salles */
+.dev-credit {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dev-link {
+    text-decoration: none; /* Tira o sublinhado */
+    color: inherit;        /* Faz o link herdar a cor do texto ao redor */
+    cursor: pointer;
+}
+
+.dev-credit span {
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+}
+
+.dev-link:hover span {
+    opacity: 0.8;
+    text-decoration: underline; /* Se quiser um sublinhado só no hover */
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-brand p {
+        margin: 0 auto;
+    }
+    
+    .bottom-flex {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float img {
+    width: 35px;
+    height: 35px;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+}
+
+/* Tooltip (balão de fala sutil) */
+.tooltip-whatsapp {
+    position: absolute;
+    right: 70px;
+    background-color: #4b5443; /* Cor do seu projeto */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+.whatsapp-float:hover .tooltip-whatsapp {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsividade: No mobile, ele fica um pouco menor para não atrapalhar a leitura */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    /* Esconder o tooltip no mobile para não ocupar tela */
+    .tooltip-whatsapp {
+        display: none;
     }
 }
