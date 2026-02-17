@@ -1,0 +1,170 @@
+/* 🎨 Definições de Cores e Fontes (Inspiradas na Nathália) */
+:root {
+    --bg-color: #f4f1ea;     /* Creme suave */
+    --text-color: #4b5443;   /* Verde oliva escuro */
+    --accent-color: #8c967e; /* Verde oliva claro */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+.container, .nav-container {
+    max-width: 1100px; /* Mesma largura para ambos */
+    margin: 0 auto;    /* Centraliza na tela */
+    padding: 30px;   /* Espaçamento lateral idêntico */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+.main-header {
+    background-color: var(--bg-color); /* Cor de fundo creme da referência */
+    border-bottom: 1px solid var(--accent-color);  /* Linha bem fininha e discreta */
+    position: sticky; /* O menu "gruda" no topo ao rolar */
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center; /* Alinha a imagem e o texto verticalmente */
+    gap: 15px; /* Espaço entre a imagem e o texto */
+}
+
+.logo-image {
+    height: 50px; /* Ajuste a altura conforme sua imagem */
+    width: auto;  /* Mantém a proporção da logo */
+}
+
+/* Estilo do Nome/Logo */
+.logo a {
+    font-family: 'Playfair Display', serif; /* Fonte elegante */
+    font-size: 1.80rem;
+    color: var(--text-color); /* Nude sofisticado */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Menu de Navegação */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--accent-color); /* Cor muda ao passar o mouse */
+}
+
+/* Responsividade (Celular) */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Escondemos o menu no mobile por enquanto */
+    }
+    
+    .menu-toggle {
+        cursor: pointer;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: var(--text-color);
+        transition: 0.3s;
+    }
+}
+
+
+/* --- HERO SECTION --- */
+.hero {
+    padding-top: 40px; /* Espaço pequeno entre nav e título */
+    padding-bottom: 80px;
+    min-height: auto; /* Evita que o conteúdo se espalhe demais verticalmente */
+}
+
+section.hero.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+}
+
+.hero-image {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    /* Adicionamos um padding para o box-shadow não bater na borda da seção */
+    padding: 20px; 
+}
+
+.hero-image img {
+    width: 100%;
+    /* Ajuste fino no tamanho para não ficar gigante nem pequena demais */
+    max-width: 420px; 
+    height: auto;
+    border-radius: 15px;
+    /* Ajuste na sombra para acompanhar a paleta da Nathália */
+    box-shadow: 20px 20px 0px var(--accent-color);
+    /* Garante que a foto mantenha a proporção sem cortes internos */
+    object-fit: contain; 
+}
+
+/* Ajuste específico para o texto não ficar "esmagado" */
+.hero-content {
+    flex: 1.2;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--text-color);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 968px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .nav-menu {
+        display: none; /* Ideal implementar o menu mobile no JS depois */
+    }
+}
