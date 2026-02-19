@@ -66,6 +66,22 @@ body {
     /* Mantém a proporção da logo */
 }
 
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-crp {
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    /* Montserrat ou Inter */
+    color: var(--text-color);
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
 /* Estilo do Nome/Logo */
 .logo a {
     font-family: 'Playfair Display', serif;
@@ -174,6 +190,16 @@ body {
         box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
         display: flex;
         z-index: 1050;
+    }
+
+    .logo-crp {
+        font-size: 0.6rem;
+        font-family: var(--font-body);
+        /* Montserrat ou Inter */
+        color: var(--text-color);
+        opacity: 0.7;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
     }
 
     .logo {
@@ -658,102 +684,112 @@ section.hero.container {
     /* Opcional: deixa o mapa levemente mais sofisticado */
 }
 
+/* --- FOOTER ESTRUTURA --- */
 .main-footer {
     background-color: var(--bg-color);
-    padding: 60px 0 20px 0;
+    padding: 80px 0 0 0;
+    /* Respiro grande no topo */
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    color: var(--text-color);
 }
 
-/* Alinhamento das 3 colunas principais */
 .footer-grid {
     display: flex;
     justify-content: space-between;
-    /* Distribui as colunas igualmente */
+    /* Mágica acontece aqui: empurra as colunas para os lados */
     align-items: flex-start;
-    /* Alinha o topo delas */
-    gap: 60px;
-    /* Espaço entre colunas */
-    margin-bottom: 40px;
+    gap: 200px;
+    /* Espaçamento mínimo de segurança entre as colunas */
+    margin-bottom: 60px;
 }
 
+/* --- COLUNAS INDIVIDUAIS --- */
 .footer-brand {
-    flex: 1.5;
-    /* Dá um pouco mais de espaço para a logo e slogan */
+    flex: 2;
+    /* A marca ganha um pouco mais de espaço horizontal */
+    max-width: 350px;
 }
 
 .footer-links,
 .footer-crp {
     flex: 1;
+    /* Colunas de links e CRP dividem o resto igualmente */
 }
 
+/* Espaçamento interno da marca */
 .footer-nath {
     display: flex;
     align-items: center;
-    /* Alinha a imagem e o texto verticalmente */
     gap: 15px;
-    /* Espaço entre a imagem e o texto */
-}
-
-.footer-nath p {
-    font-family: 'Playfair Display', serif;
-    /* Fonte elegante */
-    font-size: 1.8rem;
-    color: var(--text-color);
-    /* Nude sofisticado */
-    text-decoration: none;
-    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .footer-logo {
     height: 45px;
-    /* Ajuste conforme a sua logo */
     width: auto;
-    margin-bottom: 15px;
-    display: block;
 }
 
-.footer-brand p {
-    font-size: 0.9rem;
-    max-width: 250px;
-    /* Evita que o texto da logo se espalhe muito */
-}
-
-.footer-links h4,
-.footer-crp h4 {
-    font-family: var(--font-heading);
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
+/* Estilo das listas (Navegação) */
 .footer-links ul {
     list-style: none;
     padding: 0;
 }
 
-.footer-links ul li {
+.footer-links li {
     margin-bottom: 12px;
+    /* Respiro entre cada link da lista */
 }
 
 .footer-links a {
     text-decoration: none;
     color: var(--text-color);
-    font-size: 0.9rem;
-    transition: 0.3s ease;
+    transition: opacity 0.3s;
 }
 
 .footer-links a:hover {
-    color: var(--accent-color);
-    padding-left: 5px;
-    /* Efeito sutil de hover */
+    opacity: 0.7;
 }
 
-.footer-crp p {
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    line-height: 1.4;
+
+/* Container de texto ao lado da logo no footer */
+.footer-titles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.footer-titles h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 1.1;
+    color: var(--text-color);
+}
+
+/* O CRP no footer */
+.footer-crp-sub {
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Espaçamento da descrição abaixo da marca */
+.footer-description {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    max-width: 300px;
+    line-height: 1.6;
+}
+
+/* Reutilizando o alinhamento flex que já tínhamos */
+.footer-nath {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 
 /* --- BARRA INFERIOR (Créditos) --- */
 .footer-bottom {
