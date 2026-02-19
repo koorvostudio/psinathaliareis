@@ -176,6 +176,31 @@ body {
         z-index: 1050;
     }
 
+    .logo {
+        display: flex;
+        align-items: center;
+        /* Alinha a imagem e o texto verticalmente */
+        gap: 10px;
+        /* Espaço entre a imagem e o texto */
+    }
+
+    .logo-image {
+        height: 25px;
+        /* Ajuste a altura conforme sua imagem */
+        width: auto;
+        /* Mantém a proporção da logo */
+    }
+
+    .logo a {
+        font-family: 'Playfair Display', serif;
+        /* Fonte elegante */
+        font-size: 1.40rem;
+        color: var(--text-color);
+        /* Nude sofisticado */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
     .nav-menu.active {
         right: 0;
     }
@@ -420,18 +445,20 @@ section.hero.container {
 
 /* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
-.abordagem-section {
+    .abordagem-section {
         padding: 80px 0;
     }
 
     .abordagem-header {
-        margin-bottom: 50px; /* Espaço para o mobile */
+        margin-bottom: 50px;
+        /* Espaço para o mobile */
     }
 
     .pbe-grid {
         flex-direction: column;
         align-items: center;
-        gap: 30px; /* Espaço vertical entre os cards empilhados */
+        gap: 30px;
+        /* Espaço vertical entre os cards empilhados */
     }
 
     .pbe-card {
