@@ -1,10 +1,21 @@
+/* Import no Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Outfit:wght@300;400&display=swap');
+
 /* 🎨 Definições de Cores e Fontes (Inspiradas na Nathália) */
 :root {
-    --bg-color: #f4f1ea;     /* Creme suave */
-    --text-color: #4b5443;   /* Verde oliva escuro */
-    --accent-color: #8c967e; /* Verde oliva claro */
+    --bg-color: #f4f1ea;
+    /* Creme suave */
+    --text-color: #4b5443;
+    /* Verde oliva escuro */
+    --accent-color: #8c967e;
+    /* Verde oliva claro */
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -16,42 +27,52 @@ body {
 }
 
 
-.container, .nav-container {
-    max-width: 1100px; /* Mesma largura para ambos */
-    margin: 0 auto;    /* Centraliza na tela */
-    padding: 30px;   /* Espaçamento lateral idêntico */
+.container,
+.nav-container {
+    max-width: 1100px;
+    /* Mesma largura para ambos */
+    margin: 0 auto;
+    /* Centraliza na tela */
+    padding: 30px;
+    /* Espaçamento lateral idêntico */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-
-
-
 .main-header {
-    background-color: var(--bg-color); /* Cor de fundo creme da referência */
-    border-bottom: 1px solid var(--accent-color);  /* Linha bem fininha e discreta */
-    position: sticky; /* O menu "gruda" no topo ao rolar */
+    background-color: var(--bg-color);
+    /* Cor de fundo creme da referência */
+    border-bottom: 1px solid var(--accent-color);
+    /* Linha bem fininha e discreta */
+    position: sticky;
+    /* O menu "gruda" no topo ao rolar */
     top: 0;
     z-index: 1000;
 }
 
 .logo {
     display: flex;
-    align-items: center; /* Alinha a imagem e o texto verticalmente */
-    gap: 15px; /* Espaço entre a imagem e o texto */
+    align-items: center;
+    /* Alinha a imagem e o texto verticalmente */
+    gap: 15px;
+    /* Espaço entre a imagem e o texto */
 }
 
 .logo-image {
-    height: 50px; /* Ajuste a altura conforme sua imagem */
-    width: auto;  /* Mantém a proporção da logo */
+    height: 50px;
+    /* Ajuste a altura conforme sua imagem */
+    width: auto;
+    /* Mantém a proporção da logo */
 }
 
 /* Estilo do Nome/Logo */
 .logo a {
-    font-family: 'Playfair Display', serif; /* Fonte elegante */
+    font-family: 'Playfair Display', serif;
+    /* Fonte elegante */
     font-size: 1.80rem;
-    color: var(--text-color); /* Nude sofisticado */
+    color: var(--text-color);
+    /* Nude sofisticado */
     text-decoration: none;
     font-weight: bold;
 }
@@ -74,49 +95,110 @@ body {
 }
 
 .nav-menu a:hover {
-    color: var(--accent-color); /* Cor muda ao passar o mouse */
+    color: var(--accent-color);
+    /* Cor muda ao passar o mouse */
 }
 
-/* Responsividade (Celular) */
+/* Botão Hambúrguer (Escondido por padrão no Desktop) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
 @media (max-width: 768px) {
     .nav-container {
         padding: 15px 20px;
     }
 
-    /* Estilização para o Menu Hambúrguer aparecer */
+    /* Exibe o hambúrguer apenas aqui */
     .menu-toggle {
-        display: block;
-        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 1100;
+        /* Garante que o botão fique acima do vidro */
     }
 
-    /* Transformando a lista de links em menu suspenso */
+    /* Animação para transformar em X ao abrir */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Transformando a lista de links em menu suspenso com efeito de vidro */
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%; /* Começa escondido fora da tela */
-        width: 70%;
+        right: -100%;
+        width: 80%;
+        /* Ajuste leve na largura para estética */
         height: 100vh;
-        background-color: var(--bg-color);
+
+        /* --- EFEITO DE VIDRO --- */
+        background-color: rgba(244, 241, 230, 0.9);
+        /* Cor creme com transparência */
+        backdrop-filter: blur(2px);
+        /* O desfoque propriamente dito */
+        -webkit-backdrop-filter: blur(12px);
+
+        /* --- CANTOS ARREDONDADOS --- */
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+
         flex-direction: column;
         justify-content: center;
+        align-items: center;
+        /* Centraliza os links no menu mobile */
         gap: 40px;
         transition: 0.4s ease-in-out;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        display: flex; /* Garante que o flex funcione quando a classe active entrar */
+        box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
+        display: flex;
+        z-index: 1050;
     }
 
-    /* Classe que será ativada via JS */
     .nav-menu.active {
         right: 0;
+    }
+
+    /* Ajuste nos links para combinar com o visual elegante */
+    .nav-menu a {
+        font-size: 1.4rem;
+        font-family: var(--font-heading);
+        color: var(--text-color);
+        font-weight: 700;
+        text-shadow: 0px 1px 10px rgba(255, 255, 255, 0.3);
+        text-decoration: none;
     }
 }
 
 
 /* --- HERO SECTION --- */
 .hero {
-    padding-top: 40px; /* Espaço pequeno entre nav e título */
+    padding-top: 40px;
+    /* Espaço pequeno entre nav e título */
     padding-bottom: 80px;
-    min-height: auto; /* Evita que o conteúdo se espalhe demais verticalmente */
+    min-height: auto;
+    /* Evita que o conteúdo se espalhe demais verticalmente */
 }
 
 section.hero.container {
@@ -131,19 +213,19 @@ section.hero.container {
     display: flex;
     justify-content: center;
     /* Adicionamos um padding para o box-shadow não bater na borda da seção */
-    padding: 20px; 
+    padding: 20px;
 }
 
 .hero-image img {
     width: 100%;
     /* Ajuste fino no tamanho para não ficar gigante nem pequena demais */
-    max-width: 420px; 
+    max-width: 420px;
     height: auto;
     border-radius: 15px;
     /* Ajuste na sombra para acompanhar a paleta da Nathália */
     box-shadow: 20px 20px 0px var(--accent-color);
     /* Garante que a foto mantenha a proporção sem cortes internos */
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 /* Ajuste específico para o texto não ficar "esmagado" */
@@ -168,6 +250,7 @@ section.hero.container {
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
+
     /* Hero: Foto em cima, texto embaixo */
     section.hero.container {
         flex-direction: column-reverse;
@@ -177,7 +260,8 @@ section.hero.container {
     }
 
     .hero-image img {
-        max-width: 280px; /* Foto menor para caber no visor */
+        max-width: 280px;
+        /* Foto menor para caber no visor */
         box-shadow: 15px 15px 0px var(--accent-color);
     }
 
@@ -214,13 +298,15 @@ section.hero.container {
 
 .sobre-section {
     padding: 100px 0;
-    background-color: white; /* Diferencia da cor creme do Hero */
+    background-color: white;
+    /* Diferencia da cor creme do Hero */
 }
 
 .sobre-grid {
     display: flex;
     align-items: center;
-    gap: 60px; /* Espaço entre a foto e o texto */
+    gap: 60px;
+    /* Espaço entre a foto e o texto */
 }
 
 .sobre-image {
@@ -231,7 +317,8 @@ section.hero.container {
     width: 100%;
     max-width: 380px;
     border-radius: 20px;
-    box-shadow: -20px 20px 0px var(--bg-color); /* Sombra invertida para estilo */
+    box-shadow: -20px 20px 0px var(--bg-color);
+    /* Sombra invertida para estilo */
     object-fit: cover;
     margin: 0 auto;
 }
@@ -257,23 +344,32 @@ section.hero.container {
 /* Responsividade */
 @media (max-width: 768px) {
     .sobre-grid {
-        flex-direction: column; /* Coloca a foto em cima do texto */
+        flex-direction: column;
+        /* Coloca a foto em cima do texto */
         text-align: center;
         gap: 30px;
     }
 }
 
-/* 🔬 Seção Abordagem (PBE) - LAYOUT HORIZONTAL */
+/* --- SEÇÃO ABORDAGEM --- */
 .abordagem-section {
     padding: 100px 0;
     background-color: var(--bg-color);
-    text-align: center;
 }
 
+/* O container centraliza o conteúdo e organiza o fluxo vertical (Header -> Grid) */
+.abordagem-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    /* Espaço entre o texto e os cards */
+}
+
+/* Estilo do bloco de texto */
 .abordagem-header {
+    text-align: center;
     max-width: 800px;
-    margin: 0 auto 60px; /* Margem inferior para separar do grid */
-    padding: 0 20px;
 }
 
 .abordagem-header h2 {
@@ -283,48 +379,69 @@ section.hero.container {
     margin-bottom: 20px;
 }
 
-/* 🖼️ Grid de Cards - Horizontal no Desktop */
+/* --- GRID DE CARDS (HORIZONTAL) --- */
 .pbe-grid {
     display: flex;
-    flex-direction: row; /* Força horizontal */
-    flex-wrap: wrap;     /* Quebra linha se a tela for pequena demais */
-    gap: 30px;
+    flex-direction: row;
+    /* Força os cards ficarem lado a lado */
     justify-content: center;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
+    gap: 30px;
+    width: 100%;
 }
 
 .pbe-card {
-    flex: 1; /* Cards tentam dividir o espaço igual */
-    min-width: 280px; /* Não deixa ficarem muito estreitos */
-    max-width: 350px; /* Não deixa ficarem gigantes */
+    flex: 1;
+    /* Faz os 3 cards terem a mesma largura */
     background-color: #ffffff;
     padding: 40px 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    text-align: center;
     transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .pbe-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .pbe-icon {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     display: block;
 }
 
+.pbe-card h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
+.abordagem-section {
+        padding: 80px 0;
+    }
+
+    .abordagem-header {
+        margin-bottom: 50px; /* Espaço para o mobile */
+    }
+
     .pbe-grid {
-        flex-direction: column; /* Empilha no celular */
+        flex-direction: column;
         align-items: center;
+        gap: 30px; /* Espaço vertical entre os cards empilhados */
     }
 
     .pbe-card {
         width: 100%;
-        max-width: 90%; /* Respiro lateral no celular */
+        max-width: 90%;
+        padding: 40px 25px;
+    }
+
+    .faq-container {
+        padding: 0px 10px;
     }
 }
 
@@ -342,9 +459,12 @@ section.hero.container {
 }
 
 .faq-item {
-    background-color: #ffffff; /* Fundo branco do card */
-    border: 1px solid #ddd;    /* Borda sutil */
-    border-radius: 4px;       /* Bordas quase retas */
+    background-color: #ffffff;
+    /* Fundo branco do card */
+    border: 1px solid #ddd;
+    /* Borda sutil */
+    border-radius: 4px;
+    /* Bordas quase retas */
     margin-bottom: 10px;
     transition: all 0.3s ease;
 }
@@ -353,10 +473,13 @@ section.hero.container {
     padding: 20px;
     font-weight: bold;
     cursor: pointer;
-    list-style: none; /* Remove a setinha padrão do navegador */
+    list-style: none;
+    /* Remove a setinha padrão do navegador */
     display: flex;
-    justify-content: space-between; /* Espaça texto e ícone */
+    justify-content: space-between;
+    /* Espaça texto e ícone */
     align-items: center;
+    column-gap: 20px;
     color: var(--text-color);
     font-size: 1rem;
 }
@@ -376,7 +499,8 @@ section.hero.container {
 
 /* Muda o + para - quando aberto */
 .faq-item[open] summary .icon {
-    transform: rotate(45deg); /* Gira para parecer um X ou pode trocar o conteúdo */
+    transform: rotate(45deg);
+    /* Gira para parecer um X ou pode trocar o conteúdo */
 }
 
 .faq-content {
@@ -384,19 +508,14 @@ section.hero.container {
     line-height: 1.6;
     color: #333;
     font-size: 0.95rem;
-    border-top: 1px solid #eee; /* Linha divisória interna */
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .pbe-grid {
-        flex-direction: column;
-    }
+    border-top: 1px solid #eee;
+    /* Linha divisória interna */
 }
 
 .contato-section {
     padding: 100px 0;
-    background-color: #fff; /* Usando o creme do projeto */
+    background-color: #fff;
+    /* Usando o creme do projeto */
 }
 
 .contato-container {
@@ -442,18 +561,20 @@ section.hero.container {
     padding: 50px 40px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     max-width: 400px;
 }
 
-.agendar-card h3 {
-    font-family: var(--font-heading);
+.agendar-card h2 {
+    font-family: 'Fraunces';
+    font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
 .btn-whatsapp {
     display: block;
-    background-color: #25D366; /* Cor oficial do WhatsApp */
+    background-color: #25D366;
+    /* Cor oficial do WhatsApp */
     color: white;
     padding: 18px;
     border-radius: 8px;
@@ -481,7 +602,7 @@ section.hero.container {
         text-align: center;
         gap: 40px;
     }
-    
+
     .item-contato {
         justify-content: center;
     }
@@ -489,62 +610,77 @@ section.hero.container {
 
 .mapa-section {
     padding: 60px 0;
-    background-color: #fff; /* Ou a cor de fundo que preferir para destacar */
+    background-color: #fff;
+    /* Ou a cor de fundo que preferir para destacar */
 }
 
 .mapa-wrapper {
     width: 100%;
     overflow: hidden;
-    border-radius: 20px; /* Mantendo a identidade visual dos seus cards */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05); /* Sombra suave para dar profundidade */
-    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 20px;
+    /* Mantendo a identidade visual dos seus cards */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    /* Sombra suave para dar profundidade */
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .mapa-wrapper iframe {
-    display: block; /* Remove espaços vazios na base do iframe */
-    filter: grayscale(0.2) contrast(0.9); /* Opcional: deixa o mapa levemente mais sofisticado */
+    display: block;
+    /* Remove espaços vazios na base do iframe */
+    filter: grayscale(0.2) contrast(0.9);
+    /* Opcional: deixa o mapa levemente mais sofisticado */
 }
 
 .main-footer {
-    background-color: var(--bg-color); 
+    background-color: var(--bg-color);
     padding: 60px 0 20px 0;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     color: var(--text-color);
 }
 
 /* Alinhamento das 3 colunas principais */
 .footer-grid {
     display: flex;
-    justify-content: space-between; /* Distribui as colunas igualmente */
-    align-items: flex-start;        /* Alinha o topo delas */
-    gap: 60px;                      /* Espaço entre colunas */
+    justify-content: space-between;
+    /* Distribui as colunas igualmente */
+    align-items: flex-start;
+    /* Alinha o topo delas */
+    gap: 60px;
+    /* Espaço entre colunas */
     margin-bottom: 40px;
 }
 
 .footer-brand {
-    flex: 1.5; /* Dá um pouco mais de espaço para a logo e slogan */
+    flex: 1.5;
+    /* Dá um pouco mais de espaço para a logo e slogan */
 }
 
-.footer-links, .footer-crp {
+.footer-links,
+.footer-crp {
     flex: 1;
 }
 
 .footer-nath {
     display: flex;
-    align-items: center; /* Alinha a imagem e o texto verticalmente */
-    gap: 15px; /* Espaço entre a imagem e o texto */
+    align-items: center;
+    /* Alinha a imagem e o texto verticalmente */
+    gap: 15px;
+    /* Espaço entre a imagem e o texto */
 }
 
 .footer-nath p {
-    font-family: 'Playfair Display', serif; /* Fonte elegante */
+    font-family: 'Playfair Display', serif;
+    /* Fonte elegante */
     font-size: 1.8rem;
-    color: var(--text-color); /* Nude sofisticado */
+    color: var(--text-color);
+    /* Nude sofisticado */
     text-decoration: none;
     font-weight: bold;
 }
 
 .footer-logo {
-    height: 45px; /* Ajuste conforme a sua logo */
+    height: 45px;
+    /* Ajuste conforme a sua logo */
     width: auto;
     margin-bottom: 15px;
     display: block;
@@ -552,10 +688,12 @@ section.hero.container {
 
 .footer-brand p {
     font-size: 0.9rem;
-    max-width: 250px; /* Evita que o texto da logo se espalhe muito */
+    max-width: 250px;
+    /* Evita que o texto da logo se espalhe muito */
 }
 
-.footer-links h4, .footer-crp h4 {
+.footer-links h4,
+.footer-crp h4 {
     font-family: var(--font-heading);
     margin-bottom: 20px;
     font-size: 1.1rem;
@@ -580,7 +718,8 @@ section.hero.container {
 
 .footer-links a:hover {
     color: var(--accent-color);
-    padding-left: 5px; /* Efeito sutil de hover */
+    padding-left: 5px;
+    /* Efeito sutil de hover */
 }
 
 .footer-crp p {
@@ -591,14 +730,15 @@ section.hero.container {
 
 /* --- BARRA INFERIOR (Créditos) --- */
 .footer-bottom {
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 25px;
     margin-top: 20px;
 }
 
 .bottom-flex {
     display: flex;
-    justify-content: space-between; /* Texto na esquerda, dev-salles na direita */
+    justify-content: space-between;
+    /* Texto na esquerda, dev-salles na direita */
     align-items: center;
     font-size: 0.85rem;
     opacity: 0.8;
@@ -611,8 +751,10 @@ section.hero.container {
 }
 
 .dev-link {
-    text-decoration: none; /* Tira o sublinhado */
-    color: inherit;        /* Faz o link herdar a cor do texto ao redor */
+    text-decoration: none;
+    /* Tira o sublinhado */
+    color: inherit;
+    /* Faz o link herdar a cor do texto ao redor */
     cursor: pointer;
 }
 
@@ -625,24 +767,51 @@ section.hero.container {
 
 .dev-link:hover span {
     opacity: 0.8;
-    text-decoration: underline; /* Se quiser um sublinhado só no hover */
+    text-decoration: underline;
+    /* Se quiser um sublinhado só no hover */
 }
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
+
+    /* Centraliza o conteúdo geral do footer */
     .footer-grid {
         flex-direction: column;
+        align-items: center;
+        /* Alinha os blocos no centro */
         text-align: center;
+        /* Alinha os textos internamente */
         gap: 40px;
     }
 
-    .footer-brand p {
-        margin: 0 auto;
+    /* Centraliza o logo e o nome da Nathália no rodapé */
+    .footer-nath {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    
+
+    /* Remove marcadores e centraliza os links de navegação */
+    .footer-links ul {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Centraliza o bloco de registro profissional */
+    .footer-links:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ajuste fino na parte inferior (Créditos) */
     .bottom-flex {
         flex-direction: column;
-        gap: 15px;
+        align-items: center;
+        gap: 10px;
         text-align: center;
     }
 }
@@ -680,7 +849,8 @@ section.hero.container {
 .tooltip-whatsapp {
     position: absolute;
     right: 70px;
-    background-color: #4b5443; /* Cor do seu projeto */
+    background-color: #4b5443;
+    /* Cor do seu projeto */
     color: white;
     padding: 8px 15px;
     border-radius: 8px;
@@ -704,12 +874,12 @@ section.hero.container {
         bottom: 20px;
         right: 20px;
     }
-    
+
     .whatsapp-float img {
         width: 28px;
         height: 28px;
     }
-    
+
     /* Esconder o tooltip no mobile para não ocupar tela */
     .tooltip-whatsapp {
         display: none;

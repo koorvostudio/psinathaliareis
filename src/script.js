@@ -1,12 +1,21 @@
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('mobile-menu');
+    const navMenu = document.querySelector('.nav-menu');
 
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    
-    // Animação opcional do ícone hambúrguer (X)
-    const bars = document.querySelectorAll('.bar');
-    bars[0].classList.toggle('rotate-down');
-    bars[1].classList.toggle('fade-out');
-    bars[2].classList.toggle('rotate-up');
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            // Alterna a classe tanto no menu quanto no próprio botão (para o X)
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Fecha o menu ao clicar em um link (para navegar nas seções)
+        const links = document.querySelectorAll('.nav-menu a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
 });
