@@ -263,16 +263,17 @@ section.hero.container {
     }
 }
 
+/* 🔬 Seção Abordagem (PBE) - LAYOUT HORIZONTAL */
 .abordagem-section {
     padding: 100px 0;
-    background-color: var(--bg-color); /* Fundo limpo para passar clareza */
+    background-color: var(--bg-color);
     text-align: center;
 }
 
 .abordagem-header {
     max-width: 800px;
-    margin: 0 auto 60px auto;
-    margin-right: 20px;
+    margin: 0 auto 60px; /* Margem inferior para separar do grid */
+    padding: 0 20px;
 }
 
 .abordagem-header h2 {
@@ -282,24 +283,31 @@ section.hero.container {
     margin-bottom: 20px;
 }
 
+/* 🖼️ Grid de Cards - Horizontal no Desktop */
 .pbe-grid {
     display: flex;
+    flex-direction: row; /* Força horizontal */
+    flex-wrap: wrap;     /* Quebra linha se a tela for pequena demais */
     gap: 30px;
     justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .pbe-card {
-    flex: 1;
-    background-color: var(--bg-color); /* O creme suave do projeto */
+    flex: 1; /* Cards tentam dividir o espaço igual */
+    min-width: 280px; /* Não deixa ficarem muito estreitos */
+    max-width: 350px; /* Não deixa ficarem gigantes */
+    background-color: #ffffff;
     padding: 40px 30px;
     border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease;
 }
 
 .pbe-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .pbe-icon {
@@ -308,16 +316,16 @@ section.hero.container {
     display: block;
 }
 
-.pbe-card h3 {
-    font-family: var(--font-heading);
-    color: var(--text-color);
-    margin-bottom: 15px;
-}
+@media (max-width: 768px) {
+    .pbe-grid {
+        flex-direction: column; /* Empilha no celular */
+        align-items: center;
+    }
 
-.pbe-card p {
-    font-size: 0.95rem;
-    color: var(--text-color);
-    line-height: 1.6;
+    .pbe-card {
+        width: 100%;
+        max-width: 90%; /* Respiro lateral no celular */
+    }
 }
 
 .faq-container {
