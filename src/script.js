@@ -123,4 +123,63 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Comportamento do botão flutuante do WhatsApp
+    const whatsappBtn = document.querySelector('.whatsapp-float');
+    let scrollTimeout;
+    let isMouseOver = false; // Flag para rastrear o mouse
+
+    // Função para esconder o botão com segurança
+    function hideButton() {
+        if (!isMouseOver && window.scrollY > 300) {
+            whatsappBtn.classList.remove('show');
+        }
+    }
+
+    // 1. Lógica de Scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            whatsappBtn.classList.add('show');
+
+            // Reinicia o timer toda vez que rola
+            clearTimeout(scrollTimeout);
+
+            // Só agenda o sumiço se o mouse NÃO estiver em cima
+            if (!isMouseOver) {
+                scrollTimeout = setTimeout(hideButton, 3000);
+            }
+        } else {
+            whatsappBtn.classList.remove('show');
+        }
+    });
+
+    // 2. Interação de Mouse: Manter visível no Hover
+    whatsappBtn.addEventListener('mouseenter', () => {
+        isMouseOver = true;
+        clearTimeout(scrollTimeout); // Cancela qualquer agendamento de sumiço
+        whatsappBtn.classList.add('show');
+    });
+
+    // 3. Interação de Mouse: Voltar a contar tempo ao sair
+    whatsappBtn.addEventListener('mouseleave', () => {
+        isMouseOver = false;
+        // Quando o mouse sai, damos mais 2 segundos antes de esconder
+        scrollTimeout = setTimeout(hideButton, 2000);
+    });
+
+    // 4. Bônus: Reaparecer se o mouse chegar perto (Proximidade)
+    document.addEventListener('mousemove', (e) => {
+        const threshold = 150; // Distância em pixels para ativar
+        const rect = whatsappBtn.getBoundingClientRect();
+
+        // Calcula distância do mouse até o centro do botão
+        const buttonX = rect.left + rect.width / 2;
+        const buttonY = rect.top + rect.height / 2;
+        const distance = Math.hypot(e.clientX - buttonX, e.clientY - buttonY);
+
+        if (distance < threshold && window.scrollY > 300) {
+            whatsappBtn.classList.add('show');
+            clearTimeout(scrollTimeout);
+        }
+    });
 });
