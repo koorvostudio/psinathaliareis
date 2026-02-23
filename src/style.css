@@ -26,6 +26,9 @@ body {
     margin: 0;
 }
 
+main {
+    transition: all 0.3s ease;
+}
 
 .container,
 .nav-container {
@@ -39,16 +42,28 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+	
+.nav-container {
+    transition: padding 0.3s ease, height 0.3s ease;
+    will-change: padding;
+}
 
 .main-header {
     background-color: var(--bg-color);
     /* Cor de fundo creme da referência */
     border-bottom: 1px solid var(--accent-color);
+    border-top: 1px solid var(--bg-color);
     /* Linha bem fininha e discreta */
     position: sticky;
     /* O menu "gruda" no topo ao rolar */
     top: 0;
+    width: 100%;
     z-index: 1000;
+    will-change: padding;
+}
+	
+.main-header.scrolling .nav-container {
+    padding-block: 12px;
 }
 
 .logo {
@@ -64,12 +79,15 @@ body {
     /* Ajuste a altura conforme sua imagem */
     width: auto;
     /* Mantém a proporção da logo */
+    transition: all 0.3s ease;
 }
 
 .logo-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: all 0.3s ease;
+    text-wrap: nowrap;
 }
 
 .logo-crp {
@@ -80,6 +98,7 @@ body {
     opacity: 0.7;
     letter-spacing: 0.5px;
     margin-top: 2px;
+    transition: all 0.3s ease;
 }
 
 /* Estilo do Nome/Logo */
@@ -91,6 +110,27 @@ body {
     /* Nude sofisticado */
     text-decoration: none;
     font-weight: bold;
+    transition: all 0.3s ease;
+}
+	
+/* 1. Faz o CRP desaparecer suavemente */
+.main-header.scrolling .logo-crp {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+/* 2. Ajusta o tamanho da fonte do nome (opcional, para um efeito mais fluido) */
+.main-header.scrolling .logo a {
+    font-size: 1.50rem; /* Diminui levemente para caber melhor na barra menor */
+}
+/* 3. Garante que o container do texto centralize o que restou (o nome) */
+.main-header.scrolling .logo-text {
+    justify-content: center;
+    /* Como o CRP agora tem height 0, o flex-direction column
+       com justify-content center centralizará o 'logo a' perfeitamente */
 }
 
 /* Menu de Navegação */
@@ -100,6 +140,11 @@ body {
     margin-left: auto;
     align-items: center;
     gap: 30px;
+}
+	
+.main-header.scrolling .nav-menu {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .nav-menu a {
@@ -522,7 +567,7 @@ section.hero.container {
     transition: all 0.3s ease;
 }
 
-.faq-item summary {
+.faq-question {
     padding: 20px;
     font-weight: bold;
     cursor: pointer;
@@ -538,23 +583,28 @@ section.hero.container {
 }
 
 /* Esconde a setinha padrão do details no Safari/Chrome */
-.faq-item summary::-webkit-details-marker {
+/* .faq-item summary::-webkit-details-marker {
     display: none;
-}
+} */
 
 /* Ícone de + estilizado na direita */
-.faq-item summary .icon {
+.faq-question .icon {
     font-size: 1.5rem;
     font-weight: bold;
     color: #000;
     transition: transform 0.3s ease;
 }
 
-/* Muda o + para - quando aberto */
-.faq-item[open] summary .icon {
+.faq-question .icon.spin {
     transform: rotate(45deg);
-    /* Gira para parecer um X ou pode trocar o conteúdo */
+    /* Gira o + para parecer um X ou pode trocar o conteúdo */
 }
+
+/* Muda o + para - quando aberto */
+/* .faq-item[open] summary .icon {
+    transform: rotate(45deg); */
+    /* Gira para parecer um X ou pode trocar o conteúdo */
+/* } */
 
 .faq-content {
     padding: 0 20px 20px 20px;
@@ -563,6 +613,7 @@ section.hero.container {
     font-size: 0.95rem;
     border-top: 1px solid #eee;
     /* Linha divisória interna */
+    display: none;
 }
 
 .contato-section {
