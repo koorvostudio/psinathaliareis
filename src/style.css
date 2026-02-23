@@ -859,6 +859,7 @@ section.hero.container {
     align-items: center;
     font-size: 0.85rem;
     opacity: 0.8;
+    padding-block: 15px;
 }
 
 /* Estilização da sua marca dev-salles */
@@ -940,7 +941,6 @@ section.hero.container {
         align-items: center;
         gap: 10px;
         text-align: center;
-        padding-block: 15px;
     }
 
     .dev-credit {
