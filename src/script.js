@@ -182,4 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(scrollTimeout);
         }
     });
+
+    const copyrightYearSpan = document.querySelector('.copyright-year');
+
+    if (copyrightYearSpan) {
+        const currentYear = new Date().getFullYear();
+        copyrightYearSpan.textContent = currentYear;
+    }
 });
