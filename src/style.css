@@ -815,9 +815,7 @@ section.hero.container {
 
 .dev-link {
     text-decoration: none;
-    /* Tira o sublinhado */
     color: inherit;
-    /* Faz o link herdar a cor do texto ao redor */
     cursor: pointer;
 }
 
@@ -825,13 +823,23 @@ section.hero.container {
     font-weight: 700;
     color: var(--accent-color);
     text-transform: lowercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 200px;
 }
 
-.dev-link:hover span {
-    opacity: 0.8;
-    text-decoration: underline;
-    /* Se quiser um sublinhado só no hover */
+/* A Logo da Koorvo no Footer */
+.logo_koorvo {
+    height: 15px; /* Altura ideal para acompanhar o texto */
+    width: auto;
+    object-fit: contain;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+    filter: grayscale(100%) opacity(0.7); /* Começa discreta para não distrair */
+}
+
+/* Efeito Hover - A Koorvo ganha vida */
+.logo_koorvo:hover {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 0 5px var(--color-secondary));
+    transform: translate(6px, -2px) scale(1.1);
 }
 
 /* --- RESPONSIVIDADE --- */
@@ -872,10 +880,15 @@ section.hero.container {
 
     /* Ajuste fino na parte inferior (Créditos) */
     .bottom-flex {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: center;
         gap: 10px;
         text-align: center;
+        padding-block: 15px;
+    }
+
+    .dev-credit {
+        margin: 0;
     }
 }
 
