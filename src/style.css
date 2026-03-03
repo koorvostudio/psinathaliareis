@@ -1,0 +1,1039 @@
+/* Import no Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Outfit:wght@300;400&display=swap');
+
+/* 🎨 Definições de Cores e Fontes (Inspiradas na Nathália) */
+:root {
+    --bg-color: #f4f1ea;
+    /* Creme suave */
+    --text-color: #4b5443;
+    /* Verde oliva escuro */
+    --accent-color: #8c967e;
+    /* Verde oliva claro */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    margin: 0;
+}
+
+main {
+    transition: all 0.3s ease;
+}
+
+.container,
+.nav-container {
+    max-width: 1100px;
+    /* Mesma largura para ambos */
+    margin: 0 auto;
+    /* Centraliza na tela */
+    padding: 30px;
+    /* Espaçamento lateral idêntico */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-container {
+    transition: padding 0.3s ease, height 0.3s ease;
+    will-change: padding;
+}
+
+.main-header {
+    background-color: var(--bg-color);
+    /* Cor de fundo creme da referência */
+    border-bottom: 1px solid var(--accent-color);
+    border-top: 1px solid var(--bg-color);
+    /* Linha bem fininha e discreta */
+    position: sticky;
+    /* O menu "gruda" no topo ao rolar */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    will-change: padding;
+}
+
+.main-header.scrolling .nav-container {
+    padding-block: 12px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    /* Alinha a imagem e o texto verticalmente */
+    gap: 15px;
+    /* Espaço entre a imagem e o texto */
+}
+
+.logo-image {
+    height: 50px;
+    /* Ajuste a altura conforme sua imagem */
+    width: auto;
+    /* Mantém a proporção da logo */
+    transition: all 0.3s ease;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-wrap: nowrap;
+}
+
+.logo-crp {
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    /* Montserrat ou Inter */
+    color: var(--text-color);
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Estilo do Nome/Logo */
+.logo a {
+    font-family: 'Playfair Display', serif;
+    /* Fonte elegante */
+    font-size: 1.80rem;
+    color: var(--text-color);
+    /* Nude sofisticado */
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* 1. Faz o CRP desaparecer suavemente */
+.main-header.scrolling .logo-crp {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* 2. Ajusta o tamanho da fonte do nome (opcional, para um efeito mais fluido) */
+.main-header.scrolling .logo a {
+    font-size: 1.50rem;
+    /* Diminui levemente para caber melhor na barra menor */
+}
+
+/* 3. Garante que o container do texto centralize o que restou (o nome) */
+.main-header.scrolling .logo-text {
+    justify-content: center;
+    /* Como o CRP agora tem height 0, o flex-direction column
+       com justify-content center centralizará o 'logo a' perfeitamente */
+}
+
+/* Menu de Navegação */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    align-items: center;
+    gap: 30px;
+}
+
+.main-header.scrolling .nav-menu {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--accent-color);
+    /* Cor muda ao passar o mouse */
+}
+
+/* Botão Hambúrguer (Escondido por padrão no Desktop) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 15px 20px;
+    }
+
+    /* Exibe o hambúrguer apenas aqui */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 1100;
+        /* Garante que o botão fique acima do vidro */
+    }
+
+    /* Animação para transformar em X ao abrir */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Transformando a lista de links em menu suspenso com efeito de vidro */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        /* Ajuste leve na largura para estética */
+        height: 100vh;
+
+        /* --- EFEITO DE VIDRO --- */
+        background-color: rgba(244, 241, 230, 0.9);
+        /* Cor creme com transparência */
+        backdrop-filter: blur(2px);
+        /* O desfoque propriamente dito */
+        -webkit-backdrop-filter: blur(12px);
+
+        /* --- CANTOS ARREDONDADOS --- */
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Centraliza os links no menu mobile */
+        gap: 40px;
+        transition: 0.4s ease-in-out;
+        box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
+        display: flex;
+        z-index: 1050;
+    }
+
+    .logo-crp {
+        font-size: 0.6rem;
+        font-family: var(--font-body);
+        /* Montserrat ou Inter */
+        color: var(--text-color);
+        opacity: 0.7;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        /* Alinha a imagem e o texto verticalmente */
+        gap: 10px;
+        /* Espaço entre a imagem e o texto */
+    }
+
+    .logo-image {
+        height: 25px;
+        /* Ajuste a altura conforme sua imagem */
+        width: auto;
+        /* Mantém a proporção da logo */
+    }
+
+    .logo a {
+        font-family: 'Playfair Display', serif;
+        /* Fonte elegante */
+        font-size: 1.40rem;
+        color: var(--text-color);
+        /* Nude sofisticado */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    /* Ajuste nos links para combinar com o visual elegante */
+    .nav-menu a {
+        font-size: 1.4rem;
+        font-family: var(--font-heading);
+        color: var(--text-color);
+        font-weight: 700;
+        text-shadow: 0px 1px 10px rgba(255, 255, 255, 0.3);
+        text-decoration: none;
+    }
+}
+
+
+/* --- HERO SECTION --- */
+.hero {
+    padding-top: 40px;
+    /* Espaço pequeno entre nav e título */
+    padding-bottom: 80px;
+    min-height: auto;
+    /* Evita que o conteúdo se espalhe demais verticalmente */
+}
+
+section.hero.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+}
+
+.hero-image {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    /* Adicionamos um padding para o box-shadow não bater na borda da seção */
+    padding: 20px;
+}
+
+.hero-image img {
+    width: 100%;
+    /* Ajuste fino no tamanho para não ficar gigante nem pequena demais */
+    max-width: 420px;
+    height: auto;
+    border-radius: 15px;
+    /* Ajuste na sombra para acompanhar a paleta da Nathália */
+    box-shadow: 20px 20px 0px var(--accent-color);
+    /* Garante que a foto mantenha a proporção sem cortes internos */
+    object-fit: contain;
+}
+
+/* Ajuste específico para o texto não ficar "esmagado" */
+.hero-content {
+    flex: 1.2;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--text-color);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+
+    /* Hero: Foto em cima, texto embaixo */
+    section.hero.container {
+        flex-direction: column-reverse;
+        gap: 40px;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero-image img {
+        max-width: 280px;
+        /* Foto menor para caber no visor */
+        box-shadow: 15px 15px 0px var(--accent-color);
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Seção Sobre */
+    .sobre-section {
+        padding: 60px 0;
+    }
+
+    .sobre-image img {
+        max-width: 300px;
+        box-shadow: -15px 15px 0px var(--bg-color);
+    }
+
+    /* Grid de Abordagem (PBE) */
+    .pbe-grid {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    /* FAQ: Ajuste de largura */
+    .faq-container {
+        margin: 40px 20px 0;
+    }
+
+    /* Mapa: Menor altura para facilitar o scroll com o dedo */
+    .mapa-wrapper iframe {
+        height: 300px;
+    }
+}
+
+.sobre-section {
+    padding: 100px 0;
+    background-color: white;
+    /* Diferencia da cor creme do Hero */
+}
+
+.sobre-grid {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    /* Espaço entre a foto e o texto */
+}
+
+.sobre-image {
+    flex: 1;
+}
+
+.sobre-image img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    box-shadow: -20px 20px 0px var(--bg-color);
+    /* Sombra invertida para estilo */
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.sobre-text {
+    flex: 1;
+}
+
+.sobre-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.sobre-text p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sobre-grid {
+        flex-direction: column;
+        /* Coloca a foto em cima do texto */
+        text-align: center;
+        gap: 30px;
+    }
+}
+
+/* --- SEÇÃO ABORDAGEM --- */
+.abordagem-section {
+    padding: 100px 0;
+    background-color: var(--bg-color);
+}
+
+/* O container centraliza o conteúdo e organiza o fluxo vertical (Header -> Grid) */
+.abordagem-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    /* Espaço entre o texto e os cards */
+}
+
+/* Estilo do bloco de texto */
+.abordagem-header {
+    text-align: center;
+    max-width: 800px;
+}
+
+.abordagem-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* --- GRID DE CARDS (HORIZONTAL) --- */
+.pbe-grid {
+    display: flex;
+    flex-direction: row;
+    /* Força os cards ficarem lado a lado */
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.pbe-card {
+    flex: 1;
+    /* Faz os 3 cards terem a mesma largura */
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pbe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.pbe-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.pbe-card h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 768px) {
+    .abordagem-section {
+        padding: 80px 0;
+    }
+
+    .abordagem-header {
+        margin-bottom: 50px;
+        /* Espaço para o mobile */
+    }
+
+    .pbe-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        /* Espaço vertical entre os cards empilhados */
+    }
+
+    .pbe-card {
+        width: 100%;
+        max-width: 90%;
+        padding: 40px 25px;
+    }
+
+    .faq-container {
+        padding: 0px 10px;
+    }
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 60px auto 0;
+    text-align: left;
+}
+
+.faq-title {
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.faq-item {
+    background-color: #ffffff;
+    /* Fundo branco do card */
+    border: 1px solid #ddd;
+    /* Borda sutil */
+    border-radius: 4px;
+    /* Bordas quase retas */
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.faq-question {
+    padding: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+    /* Remove a setinha padrão do navegador */
+    display: flex;
+    justify-content: space-between;
+    /* Espaça texto e ícone */
+    align-items: center;
+    column-gap: 20px;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+/* Esconde a setinha padrão do details no Safari/Chrome */
+/* .faq-item summary::-webkit-details-marker {
+    display: none;
+} */
+
+/* Ícone de + estilizado na direita */
+.faq-question .icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    transition: transform 0.3s ease;
+}
+
+.faq-question .icon.spin {
+    transform: rotate(45deg);
+    /* Gira o + para parecer um X ou pode trocar o conteúdo */
+}
+
+/* Muda o + para - quando aberto */
+/* .faq-item[open] summary .icon {
+    transform: rotate(45deg); */
+/* Gira para parecer um X ou pode trocar o conteúdo */
+/* } */
+
+.faq-content {
+    padding: 0 20px 20px 20px;
+    line-height: 1.6;
+    color: #333;
+    font-size: 0.95rem;
+    border-top: 1px solid #eee;
+    /* Linha divisória interna */
+    display: none;
+}
+
+.contato-section {
+    padding: 100px 0;
+    background-color: #fff;
+    /* Usando o creme do projeto */
+}
+
+.contato-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.contato-info {
+    flex: 1;
+}
+
+.contato-info h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.contato-detalhes {
+    margin-top: 30px;
+}
+
+.item-contato {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.item-contato span {
+    font-size: 1.5rem;
+}
+
+/* O Card de Ação */
+.contato-acao {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.agendar-card {
+    background-color: white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+}
+
+.agendar-card h2 {
+    font-family: 'Fraunces';
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.btn-whatsapp {
+    display: block;
+    background-color: #25D366;
+    /* Cor oficial do WhatsApp */
+    color: white;
+    padding: 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 25px 0;
+    transition: 0.3s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+    transform: scale(1.03);
+}
+
+.crp-footer {
+    font-size: 0.8rem;
+    display: block;
+    color: #888;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .contato-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .item-contato {
+        justify-content: center;
+    }
+}
+
+.mapa-section {
+    padding: 60px 0;
+    background-color: #fff;
+    /* Ou a cor de fundo que preferir para destacar */
+}
+
+.mapa-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    /* Mantendo a identidade visual dos seus cards */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    /* Sombra suave para dar profundidade */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mapa-wrapper iframe {
+    display: block;
+    /* Remove espaços vazios na base do iframe */
+    filter: grayscale(0.2) contrast(0.9);
+    /* Opcional: deixa o mapa levemente mais sofisticado */
+}
+
+/* --- FOOTER ESTRUTURA --- */
+.main-footer {
+    background-color: var(--bg-color);
+    padding: 80px 0 0 0;
+    /* Respiro grande no topo */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    /* Mágica acontece aqui: empurra as colunas para os lados */
+    align-items: flex-start;
+    gap: 200px;
+    /* Espaçamento mínimo de segurança entre as colunas */
+    margin-bottom: 60px;
+}
+
+/* --- COLUNAS INDIVIDUAIS --- */
+.footer-brand {
+    flex: 2;
+    /* A marca ganha um pouco mais de espaço horizontal */
+    max-width: 350px;
+}
+
+.footer-links,
+.footer-crp {
+    flex: 1;
+    /* Colunas de links e CRP dividem o resto igualmente */
+}
+
+/* Espaçamento interno da marca */
+.footer-nath {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-logo {
+    height: 45px;
+    width: auto;
+}
+
+/* Estilo das listas (Navegação) */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+    /* Respiro entre cada link da lista */
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 0.7;
+}
+
+
+/* Container de texto ao lado da logo no footer */
+.footer-titles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-titles h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 1.1;
+    color: var(--text-color);
+}
+
+/* O CRP no footer */
+.footer-crp-sub {
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Espaçamento da descrição abaixo da marca */
+.footer-description {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    max-width: 300px;
+    line-height: 1.6;
+}
+
+/* Reutilizando o alinhamento flex que já tínhamos */
+.footer-nath {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* --- BARRA INFERIOR (Créditos) --- */
+.footer-bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 25px;
+    margin-top: 20px;
+}
+
+.bottom-flex {
+    display: flex;
+    justify-content: space-between;
+    /* Texto na esquerda, dev-salles na direita */
+    align-items: center;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    padding-block: 15px;
+}
+
+/* Estilização da sua marca dev-salles */
+.dev-credit {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dev-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.dev-credit span {
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: lowercase;
+    letter-spacing: 200px;
+}
+
+/* A Logo da Koorvo no Footer */
+.logo_koorvo {
+    height: 15px;
+    /* Altura ideal para acompanhar o texto */
+    width: auto;
+    object-fit: contain;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+    filter: grayscale(100%) opacity(0.7);
+    /* Começa discreta para não distrair */
+}
+
+/* Efeito Hover - A Koorvo ganha vida */
+.logo_koorvo:hover {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 0 5px var(--color-secondary));
+    transform: translate(6px, -2px) scale(1.1);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+
+    /* Centraliza o conteúdo geral do footer */
+    .footer-grid {
+        flex-direction: column;
+        align-items: center;
+        /* Alinha os blocos no centro */
+        text-align: center;
+        /* Alinha os textos internamente */
+        gap: 40px;
+    }
+
+    /* Centraliza o logo e o nome da Nathália no rodapé */
+    .footer-nath {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Remove marcadores e centraliza os links de navegação */
+    .footer-links ul {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Centraliza o bloco de registro profissional */
+    .footer-links:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ajuste fino na parte inferior (Créditos) */
+    .bottom-flex {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .dev-credit {
+        margin: 0;
+    }
+}
+
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    /* Estado Inicial: Escondido abaixo da tela */
+    transform: translateY(150px) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    /* Impede cliques enquanto invisível */
+
+    /* Transição suave para a volta */
+    transition:
+        transform 0.5s ease,
+        opacity 0.4s ease;
+    will-change: transform, opacity;
+    /* Otimiza a performance da animação */
+}
+
+.whatsapp-float.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    /* Permite cliques quando visível */
+}
+
+.whatsapp-float img {
+    width: 35px;
+    height: 35px;
+}
+
+.whatsapp-float.show:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+}
+
+/* Tooltip (balão de fala sutil) */
+.tooltip-whatsapp {
+    position: absolute;
+    right: 70px;
+    background-color: #4b5443;
+    /* Cor do seu projeto */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+.whatsapp-float:hover .tooltip-whatsapp {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsividade: No mobile, ele fica um pouco menor para não atrapalhar a leitura */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* Esconder o tooltip no mobile para não ocupar tela */
+    .tooltip-whatsapp {
+        display: none;
+    }
+}
