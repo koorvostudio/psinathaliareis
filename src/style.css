@@ -889,6 +889,7 @@ section.hero.container {
     object-fit: contain;
     vertical-align: middle;
     transition: all 0.3s ease;
+    margin-left: 5px;
     filter: grayscale(100%) opacity(0.7);
     /* Começa discreta para não distrair */
 }
