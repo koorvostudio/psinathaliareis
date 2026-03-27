@@ -14,6 +14,36 @@
     --font-body: 'Inter', sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 8px;               /* Largura da barra vertical */
+  height: 8px;              /* Altura da barra horizontal */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);       /* Cor do fundo da trilha */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);          /* Cor da barra de arrasto */
+  border-radius: 5px;        /* Arredondamento */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;          /* Cor ao passar o mouse */
+}
+
+/* Cor de seleção para todos os elementos */
+::selection {
+  background-color: var(--text-color); /* Cor de fundo (ex: um laranja vibrante) */
+  color: #fff;            /* Cor do texto selecionado */
+}
+
+/* Para garantir suporte em versões bem antigas do Firefox */
+::-moz-selection {
+  background-color: var(--text-color); /* Cor de fundo (ex: um laranja vibrante) */
+  color: #fff; 
+}
+
 html {
     scroll-behavior: smooth;
 }
