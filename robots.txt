@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /assets/scripts/
+Disallow: /assets/styles/
+
+# Indica o caminho do mapa para o Google
+Sitemap: https://psinathaliareis.com.br/sitemap.xml
